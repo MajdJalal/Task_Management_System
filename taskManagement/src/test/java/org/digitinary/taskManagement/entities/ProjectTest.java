@@ -9,7 +9,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class ProjectTest {
 
 
-
+    /**
+     * tests that tasks get added successfully
+     */
     @Test
     void lenOfTasksShouldBeTwoAdd() {
         Project project = new Project();
@@ -17,7 +19,9 @@ class ProjectTest {
         project.addTask(new Task("1234"));
         assertEquals(2, project.getTasks().size());
     }
-
+    /**
+     * tests that tasks get removed successfully
+     */
     @Test
     void lenOfTasksShouldBeOneRemove() {
         Project project = new Project();
@@ -26,7 +30,9 @@ class ProjectTest {
         project.removeTask("123");
         assertEquals(1, project.getTasks().size());
     }
-
+    /**
+     * tests that i get the right num of done tasks
+     */
     @Test
     void numOfDoneTasksShouldBeZero() {
         Project project = new Project();
@@ -36,6 +42,9 @@ class ProjectTest {
         project.addTask(new Task("324"));
         assertEquals(0, project.getNumOfDoneTasks());
     }
+    /**
+     * tests that i get the right num of waiting tasks
+     */
     @Test
     void numOfWaitingTasksShouldBeFour() {
         Project project = new Project();
