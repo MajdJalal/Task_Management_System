@@ -20,6 +20,8 @@ public class Task implements Runnable{
     private int priority;//higher the num , more important
     private LocalDate dueDate;
 
+    private final Object lock = new Object();
+
     /**
      * @param id
      * @param title
@@ -164,19 +166,22 @@ public class Task implements Runnable{
 
     @Override
     public void run() {
-        System.out.println(this.getId());
-        System.out.println(this.getDescription());
-        System.out.println(this.isStatus());
-        System.out.println(this.getTitle());
-        System.out.println(this.getPriority());
-        System.out.println(this.getDueDate());
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+        synchronized (lock) {
+            System.out.println(this.getId());
+            System.out.println(this.getDescription());
+            System.out.println(this.isStatus());
+            System.out.println(this.getTitle());
+            System.out.println(this.getPriority());
+            System.out.println(this.getDueDate());
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            this.setStatus(true);
+            System.out.println("Task " + this.getId() + " is completed on thread " + Thread.currentThread().getName());
         }
-        this.setStatus(true);
-        System.out.println("Task " + this.getId() + " is completed on thread " + Thread.currentThread().getName());
+
 
 
     }
